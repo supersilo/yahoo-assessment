@@ -1,0 +1,24 @@
+Solution Summary
+Service/Component Selection:
+The solution utilizes various AWS services and components for different purposes:
+
+AWS Lambda: Deployed two Lambda functions (get_object and timestamp_uploader_lambda) written in Python 3.9 to interact with S3 buckets, perform encryption/decryption (KMS), and handle periodic tasks (CloudWatch Events). Serverless is the best solution here because the application is small and the run-time is pretty fast. deploying this on EC2 or ECS might be an overkill, we dont need a VM running all the time for this.
+S3 Bucket: Created two buckets, one as the source (timestamp_bucket) and another as the destination (replication_bucket) for replication purposes. Bucket versioning and lifecycle configurations are set to optimize storage costs.
+IAM Role & Policies: Defined IAM roles (lambda_exec_role, replication_role) and associated policies (lambda_s3_policy, replication) for Lambda execution and bucket replication, ensuring necessary permissions.
+CloudWatch Events & Lambda Triggers: Configured CloudWatch Event rules to trigger Lambda functions periodically.
+API Gateway: Created an API Gateway (lambda) to invoke Lambda functions via HTTP requests, facilitating access to specific functionalities.
+Scalability and Cost:
+As traffic increases, the cost may scale primarily due to increased Lambda invocations and potential data transfer costs between regions for bucket replication.
+Utilizing lifecycle policies helps in cost optimization by transitioning object storage classes based on their lifecycle.
+Monitoring Availability and Performance:
+CloudWatch Logs: Logging configurations (aws_cloudwatch_log_group) capture logs for API Gateway requests, Lambda function invocations, and error traces for monitoring.
+CloudWatch Metrics: Can set up additional CloudWatch Alarms and Metrics to track Lambda and API Gateway performance.
+Regional Disaster Recovery:
+In case of a regional disaster:
+The replication configuration (aws_s3_bucket_replication_configuration) ensures continuous data replication from the source to the destination bucket.
+The disaster impact to end-users is minimized as data remains available in the replicated bucket in a different region.
+Compliance with Best Practices:
+Adheres to AWS IAM best practices by providing least privilege permissions through IAM roles and policies.
+Utilizes encryption (KMS) and versioning (S3) for enhanced security and data protection.
+Implements lifecycle policies for cost-effective storage management.
+Utilizes CloudWatch for monitoring and logging, adhering to best practices for observability.
