@@ -64,3 +64,6 @@ You should receive a JSON response similar to the following:
 - variables.tf: Defines the input variables used in the Terraform configuration.
 - outputs.tf: Specifies the output values of the created resources.
 - provider.tf: Configures the AWS provider with access keys and secret keys.
+
+### Architecture Diagrams
+Please log on to https://app.diagrams.net/ and upload the drawio diagram to see the architecture diagram. Thank you
