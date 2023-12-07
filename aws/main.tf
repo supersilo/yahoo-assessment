@@ -54,8 +54,6 @@ resource "aws_lambda_function" "timestamp_uploader_lambda" {
   depends_on = [ aws_kms_key.timestamp_key, aws_iam_role.lambda_exec_role]
 }
 
-
-
 resource "aws_iam_role" "lambda_exec_role" {
   provider = aws.default
   name = "lambda_execution_role"
