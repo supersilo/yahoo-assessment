@@ -37,28 +37,30 @@ Replace <YOUR_AWS_ACCESS_KEY> and <YOUR_AWS_SECRET_KEY> with your AWS access key
    terraform apply -auto-approve
 
 4. **Accessing the Application**:
-Once the Terraform script has successfully deployed the resources, you can interact with the serverless application using the provided API endpoint.
+ Once the Terraform script has successfully deployed the resources, you can interact with the serverless application using the provided API endpoint.
 
 Open a web browser or API testing tool.
-
 Enter the following URL in the address bar or send a GET request using the tool:
-`<base_url>/timestamp`
+>`<base_url>/timestamp`
+
 Replace <base_url> with the base URL of the API Gateway deployed in the Terraform output. For example, if the API Gateway endpoint URL is https://abc123.execute-api.us-west-1.amazonaws.com, the complete URL to hit the timestamp endpoint would be `https://abc123.execute-api.us-west-1.amazonaws.com/timestamp`
 
 Hit enter or send the request.
 You should receive a JSON response similar to the following:
-    ```json
-    {
-    "Decrypted content of the latest object": "2023-12-07 03:01:20"
-    }
+```
+{
+"Decrypted content of the latest object": "2023-12-07 03:01:20"
+}
+```
+
 
 5. **Cleaning Up Resources**:
-To destroy the provisioned infrastructure and clean up resources:
+    * To destroy the provisioned infrastructure and clean up resources:
    ```bash
    terraform destroy
 
-## Folder Structure
-main.tf: Contains the Terraform configuration for provisioning resources.
-variables.tf: Defines the input variables used in the Terraform configuration.
-outputs.tf: Specifies the output values of the created resources.
-provider.tf: Configures the AWS provider with access keys and secret keys.
+### Folder Structure
+- main.tf: Contains the Terraform configuration for provisioning resources.
+- variables.tf: Defines the input variables used in the Terraform configuration.
+- outputs.tf: Specifies the output values of the created resources.
+- provider.tf: Configures the AWS provider with access keys and secret keys.
